@@ -13,7 +13,9 @@ export default class CameraMoveScript extends Laya.Script3D {
     protected camera: Laya.BaseCamera;
     protected scene: Laya.Scene3D;
 
-    protected forward = false;
+    /**
+     * Use mouse wheel to translate.
+     */
     protected forwardStep = 0;
 
     speed: number = 0.01;
@@ -120,7 +122,6 @@ export default class CameraMoveScript extends Laya.Script3D {
      * @param e
      */
     protected mouseWheel(e: Laya.Event) {
-        this.forward = e.delta > 0;
         this.forwardStep += e.delta;
     }
 
