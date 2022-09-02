@@ -48,7 +48,7 @@ export default class CameraMoveScript extends Laya.Script3D {
         Laya.stage.on(Laya.Event.MOUSE_DOWN, this, this.mouseDown);
         Laya.stage.on(Laya.Event.MOUSE_UP, this, this.mouseUp);
         Laya.stage.on(Laya.Event.MOUSE_WHEEL, this, this.mouseWheel);
-        //Laya.stage.on(Event.RIGHT_MOUSE_OUT, this, mouseOut);
+        Laya.stage.on(Laya.Event.MOUSE_OUT, this, this.mouseOut);
         this.camera = <Laya.Camera>this.owner;
     }
 
@@ -98,10 +98,11 @@ export default class CameraMoveScript extends Laya.Script3D {
     /*override*/ onDestroy(): void {
         Laya.stage.off(Laya.Event.MOUSE_DOWN, this, this.mouseDown);
         Laya.stage.off(Laya.Event.MOUSE_UP, this, this.mouseUp);
-        //Laya.stage.off(Event.RIGHT_MOUSE_OUT, this, mouseOut);
+        Laya.stage.off(Laya.Event.MOUSE_OUT, this, this.mouseOut);
+        Laya.stage.off(Laya.Event.MOUSE_WHEEL, this, this.mouseWheel);
     }
 
-    protected mouseDown(e: Event): void {
+    protected mouseDown(e: Laya.Event): void {
         this.camera.transform.localRotation.getYawPitchRoll(this.yawPitchRoll);
 
         this.lastMouseX = Laya.stage.mouseX;
@@ -109,11 +110,11 @@ export default class CameraMoveScript extends Laya.Script3D {
         this.isMouseDown = true;
     }
 
-    protected mouseUp(e: Event) {
+    protected mouseUp(e: Laya.Event) {
         this.isMouseDown = false;
     }
 
-    protected mouseOut(e: Event) {
+    protected mouseOut(e: Laya.Event) {
         this.isMouseDown = false;
     }
 
